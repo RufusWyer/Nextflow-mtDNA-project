@@ -37,7 +37,7 @@ workflow {
 	RNA_avcov_ch = racProcessing(racProcessing_in)
 	
 	// Generate plink ID list of individuals in both RNAseq and WGS datasets
-	wgs_ch = Channel.of( [ file(params.wgsbed), file(params.wgsbim), file(params.wgsfam) ] )
+	wgs_ch = Channel.of(tuple(file(params.wgsbed), file(params.wgsbim), file(params.wgsfam)))
 	plinkFiltering_in = covarCelltypes_ch.combine(wgs_ch)
         keepIds_ch = plinkFiltering(plinkFiltering_in)
 	
